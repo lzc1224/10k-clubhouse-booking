@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Management - 10k Club House</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="header">10k Club House</div>
+  <div class="admin-section">
+    <h2>Admin Panel</h2>
+    <form>
+      <h3>Set Up Game Session</h3>
+      <label for="game-type">Game Type:</label>
+      <select id="game-type" name="game-type">
+        <option value="Poker">Poker</option>
+        <option value="Baccarat Royale">Baccarat Royale</option>
+      </select>
+      <label for="game-date">Game Date:</label>
+      <input type="date" id="game-date" name="game-date" required>
+      <label for="game-time">Game Start Time:</label>
+      <input type="time" id="game-time" name="game-time" required>
+      <label for="blind">Blind (Poker only):</label>
+      <input type="text" id="blind" name="blind" placeholder="e.g. 25/50">
+      <button type="submit">Create Session</button>
+    </form>
+    <hr>
+    <form>
+      <h3>Lock/Unlock Seats</h3>
+      <label for="lock-seat">Seat Number (2-10):</label>
+      <select id="lock-seat" name="lock-seat">
+        <option value="2">Seat 2</option>
+        <option value="3">Seat 3</option>
+        <option value="4">Seat 4</option>
+        <option value="5">Seat 5</option>
+        <option value="6">Seat 6</option>
+        <option value="7">Seat 7</option>
+        <option value="8">Seat 8</option>
+        <option value="9">Seat 9</option>
+        <option value="10">Seat 10</option>
+      </select>
+      <button type="submit">Lock/Unlock</button>
+    </form>
+    <hr>
+    <form>
+      <h3>Create Agent Account</h3>
+      <label for="agent-id">Agent ID:</label>
+      <input type="text" id="agent-id" name="agent-id" required>
+      <label for="agent-temp-pw">Temporary Password:</label>
+      <input type="text" id="agent-temp-pw" name="agent-temp-pw" required>
+      <button type="submit">Create Agent</button>
+    </form>
+  </div>
+</body>
+</html>
