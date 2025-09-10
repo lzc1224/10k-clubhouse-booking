@@ -2,25 +2,241 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Register - 10k Club House</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Login - 10K Clubhouse</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 54px 10px 54px;
+    }
+    .logo-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .logo-title .main {
+      font-size: 2.4em;
+      color: #ffd700;
+      font-weight: bold;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-title .subtitle {
+      color: #b0b6c6;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      margin-top: 3px;
+    }
+    .nav-btns {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-btn {
+      padding: 8px 32px;
+      border-radius: 24px;
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: #212633;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .nav-btn.active, .nav-btn:hover {
+      background: linear-gradient(90deg, #2bb8ec 0%, #0f4d73 100%);
+      color: #fff;
+    }
+    .nav-btn.schedule {
+      background: #353535;
+      color: #fff;
+    }
+    .nav-btn.login {
+      background: linear-gradient(90deg, #a259ff 0%, #f35 100%);
+      color: #fff;
+      padding: 8px 32px;
+      border-radius: 24px;
+      font-weight: bold;
+      border: none;
+      box-shadow: 0 2px 12px rgba(162,89,255,0.11);
+      margin-left: 32px;
+      transition: background 0.2s;
+      position: relative;
+      right: -10px;
+    }
+    .login-card {
+      background: rgba(67,67,67,0.80);
+      max-width: 420px;
+      margin: 54px auto 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 38px 38px 32px 38px;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .login-card h2 {
+      text-align: center;
+      font-size: 2em;
+      font-weight: 600;
+      margin-bottom: 34px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+    }
+    .form-group input {
+      background: #23272f;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 1.1em;
+      outline: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: background 0.13s;
+    }
+    .form-group label {
+      font-size: 1em;
+      color: #e0e0e0;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .show-pw-btn {
+      position: absolute;
+      right: 18px;
+      top: 45px;
+      background: none;
+      border: none;
+      color: #ffd700;
+      cursor: pointer;
+      font-size: 1.1em;
+    }
+    .login-btn-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .login-btn {
+      background: linear-gradient(90deg, #22c55e 0%, #15803d 100%);
+      color: #fff;
+      font-size: 1.15em;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 0;
+      width: 210px;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(34,197,94,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.18s;
+    }
+    .login-btn:hover {
+      background: linear-gradient(90deg, #16a34a 0%, #065f46 100%);
+    }
+    .login-card .links {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 1em;
+      color: #b0b6c6;
+    }
+    .login-card .links a {
+      color: #2bb8ec;
+      text-decoration: none;
+      margin-left: 7px;
+      font-weight: bold;
+    }
+    @media (max-width:700px) {
+      .login-card { max-width: 95vw; padding: 18px; }
+      .top-nav { flex-direction: column; gap: 16px; padding: 18px 6px 8px 6px;}
+      .logo-title .main { font-size: 1.2em;}
+    }
+  </style>
+  <script>
+    function togglePassword() {
+      var pw = document.getElementById("password");
+      var icon = document.getElementById("pw-icon");
+      if (pw.type === "password") {
+        pw.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        pw.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  </script>
 </head>
 <body>
-  <div class="header">10k Club House</div>
-  <div class="form-section">
-    <h2>New Player Registration</h2>
-    <form>
-      <label for="realname">Real Name:</label>
-      <input type="text" id="realname" name="realname" required>
-      <label for="phone">Phone Number:</label>
-      <input type="tel" id="phone" name="phone" placeholder="88xxxxxx" required>
-      <label for="staffid">Staff ID:</label>
-      <input type="text" id="staffid" name="staffid" placeholder="88xxxxxx">
-      <label for="agent">Agent Name:</label>
-      <input type="text" id="agent" name="agent" required>
-      <button type="submit">Register</button>
+  <div class="top-nav">
+    <div class="nav-btns">
+      <a href="reserve.html"><button class="nav-btn"><i class="fa-solid fa-gem"></i>Book Seat</button></a>
+      <a href="schedule.html"><button class="nav-btn schedule"><i class="fa-solid fa-calendar"></i>Schedule</button></a>
+    </div>
+    <div class="logo-title">
+      <div class="main">
+        <i class="fa-solid fa-trophy"></i>
+        10K Clubhouse
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <div class="subtitle">
+        Premium Poker Experience • Baccarat Royale • Secure Reservations
+      </div>
+    </div>
+    <a href="login.html"><button class="nav-btn login"><i class="fa-solid fa-key"></i>Login</button></a>
+  </div>
+  <div class="login-card">
+    <h2><i class="fa-solid fa-right-to-bracket"></i> Login</h2>
+    <form class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username or phone">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+        <button type="button" class="show-pw-btn" onclick="togglePassword()">
+          <i id="pw-icon" class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+      <div class="login-btn-row">
+        <button type="submit" class="login-btn"><i class="fa-solid fa-right-to-bracket"></i>Login</button>
+      </div>
     </form>
-    <a href="login.html">Already registered? Login</a>
+    <div class="links">
+      Don't have an account? <a href="register.html">Register</a>
+    </div>
   </div>
 </body>
 </html>
