@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reserve Seat - 10k Club House</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="header">10k Club House</div>
+  <div class="form-section">
+    <h2>Reserve Your Seat</h2>
+    <form>
+      <label for="game-date">Game Date:</label>
+      <select id="game-date" name="game-date">
+        <option value="2025-09-10">Poker - 2025-09-10, 8:30pm</option>
+        <option value="2025-09-12">Baccarat Royale - 2025-09-12, 9:00pm</option>
+        <!-- Populate from backend -->
+      </select>
+      <label for="arrival-time">Estimate Arrival Time:</label>
+      <input type="time" id="arrival-time" name="arrival-time" required>
+      <label for="seat-no">Seat Number (2-10):</label>
+      <select id="seat-no" name="seat-no">
+        <option value="">No seat reservation needed</option>
+        <option value="2">Seat 2</option>
+        <option value="3">Seat 3</option>
+        <option value="4">Seat 4</option>
+        <option value="5">Seat 5</option>
+        <option value="6">Seat 6</option>
+        <option value="7">Seat 7</option>
+        <option value="8">Seat 8</option>
+        <option value="9">Seat 9</option>
+        <option value="10">Seat 10</option>
+      </select>
+      <label>
+        <input type="checkbox" name="reserve-seat-fee" value="yes">
+        Reserve seat RM 25 (optional)
+      </label>
+      <div style="background:#eaeaea;padding:10px;border-radius:8px;margin-bottom:18px;">
+        <b>Reminder:</b> Your RM 25 seat reservation fee will be returned as chips upon arrival!
+      </div>
+      <button type="submit">Reserve</button>
+    </form>
+    <div>
+      <b>Payment Gateway:</b> Touch 'n Go <span style="background:#ffd700;color:#333;padding:2px 8px;border-radius:5px;">0103006940</span>
+    </div>
+    <a href="schedule.html">Back to Schedule</a>
+  </div>
+</body>
+</html>
