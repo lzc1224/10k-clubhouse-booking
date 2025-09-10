@@ -2,49 +2,287 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Reserve Seat - 10k Club House</title>
+  <title>Reserve Your Seat - 10K Clubhouse</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 54px 10px 54px;
+    }
+    .logo-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .logo-title .main {
+      font-size: 2.4em;
+      color: #ffd700;
+      font-weight: bold;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-title .main i {
+      font-size: 1em;
+    }
+    .logo-title .subtitle {
+      color: #b0b6c6;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      margin-top: 3px;
+    }
+    .nav-btns {
+      display: flex;
+      gap: 16px;
+    }
+    .nav-btn {
+      padding: 8px 32px;
+      border-radius: 24px;
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: #212633;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .nav-btn.active, .nav-btn:hover {
+      background: linear-gradient(90deg, #2bb8ec 0%, #0f4d73 100%);
+      color: #fff;
+    }
+    .nav-btn.schedule {
+      background: #353535;
+      color: #fff;
+    }
+    .nav-btn.login {
+      background: linear-gradient(90deg, #a259ff 0%, #f35 100%);
+      color: #fff;
+      padding: 8px 32px;
+      border-radius: 24px;
+      font-weight: bold;
+      border: none;
+      box-shadow: 0 2px 12px rgba(162,89,255,0.11);
+      margin-left: 32px;
+      transition: background 0.2s;
+      position: relative;
+      right: -10px;
+    }
+    .reserve-card {
+      background: rgba(67,67,67,0.80);
+      max-width: 780px;
+      margin: 54px auto 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      padding: 38px 38px 32px 38px;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+    .reserve-card h2 {
+      text-align: center;
+      font-size: 2em;
+      font-weight: 600;
+      margin-bottom: 38px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .reserve-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 32px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: #23272f;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 1.1em;
+      outline: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: background 0.13s;
+    }
+    .form-group select {
+      cursor: pointer;
+    }
+    .form-group label {
+      font-size: 1em;
+      color: #e0e0e0;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .form-group .desc {
+      font-size: 0.95em;
+      color: #ffd700;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .form-group .desc.lock {
+      color: #ffdb80;
+    }
+    .form-group .desc.info {
+      color: #b0b6c6;
+    }
+    .form-group .fa-lock {
+      color: #ffd700;
+      margin-right: 6px;
+    }
+    .form-group .fa-utensils {
+      color: #f1b900;
+      margin-right: 6px;
+    }
+    .form-group textarea {
+      min-height: 52px;
+      resize: vertical;
+    }
+    .reserve-btn-row {
+      grid-column: span 2;
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .reserve-btn {
+      background: linear-gradient(90deg, #22c55e 0%, #15803d 100%);
+      color: #fff;
+      font-size: 1.3em;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      padding: 18px 0;
+      width: 320px;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(34,197,94,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.18s;
+    }
+    .reserve-btn:hover {
+      background: linear-gradient(90deg, #16a34a 0%, #065f46 100%);
+    }
+    @media (max-width:900px) {
+      .reserve-card { max-width: 98vw; padding: 18px; }
+      .reserve-form { grid-template-columns: 1fr; gap: 20px 0; }
+      .reserve-btn-row { grid-column: span 1; margin-top: 12px; }
+    }
+    @media (max-width:600px) {
+      .top-nav { flex-direction: column; gap: 16px; padding: 18px 6px 8px 6px;}
+      .logo-title .main { font-size: 1.2em;}
+      .reserve-card { padding: 8px; }
+      .reserve-form { gap: 12px 0; }
+      .reserve-btn { font-size: 1em; padding: 12px 0; width: 98vw; }
+    }
+  </style>
 </head>
 <body>
-  <div class="header">10k Club House</div>
-  <div class="form-section">
-    <h2>Reserve Your Seat</h2>
-    <form>
-      <label for="game-date">Game Date:</label>
-      <select id="game-date" name="game-date">
-        <option value="2025-09-10">Poker - 2025-09-10, 8:30pm</option>
-        <option value="2025-09-12">Baccarat Royale - 2025-09-12, 9:00pm</option>
-        <!-- Populate from backend -->
-      </select>
-      <label for="arrival-time">Estimate Arrival Time:</label>
-      <input type="time" id="arrival-time" name="arrival-time" required>
-      <label for="seat-no">Seat Number (2-10):</label>
-      <select id="seat-no" name="seat-no">
-        <option value="">No seat reservation needed</option>
-        <option value="2">Seat 2</option>
-        <option value="3">Seat 3</option>
-        <option value="4">Seat 4</option>
-        <option value="5">Seat 5</option>
-        <option value="6">Seat 6</option>
-        <option value="7">Seat 7</option>
-        <option value="8">Seat 8</option>
-        <option value="9">Seat 9</option>
-        <option value="10">Seat 10</option>
-      </select>
-      <label>
-        <input type="checkbox" name="reserve-seat-fee" value="yes">
-        Reserve seat RM 25 (optional)
-      </label>
-      <div style="background:#eaeaea;padding:10px;border-radius:8px;margin-bottom:18px;">
-        <b>Reminder:</b> Your RM 25 seat reservation fee will be returned as chips upon arrival!
-      </div>
-      <button type="submit">Reserve</button>
-    </form>
-    <div>
-      <b>Payment Gateway:</b> Touch 'n Go <span style="background:#ffd700;color:#333;padding:2px 8px;border-radius:5px;">0103006940</span>
+  <div class="top-nav">
+    <div class="nav-btns">
+      <button class="nav-btn active"><i class="fa-solid fa-gem"></i>Book Seat</button>
+      <button class="nav-btn schedule"><i class="fa-solid fa-calendar"></i>Schedule</button>
     </div>
-    <a href="schedule.html">Back to Schedule</a>
+    <div class="logo-title">
+      <div class="main">
+        <i class="fa-solid fa-trophy"></i>
+        10K Clubhouse
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <div class="subtitle">
+        Premium Poker Experience • Baccarat Royale • Secure Reservations
+      </div>
+    </div>
+    <button class="nav-btn login"><i class="fa-solid fa-key"></i>Login</button>
+  </div>
+  <div class="reserve-card">
+    <h2><i class="fa-solid fa-chair"></i> Reserve Your Seat</h2>
+    <form class="reserve-form">
+      <!-- Player Name -->
+      <div class="form-group">
+        <label for="playername">Player Name</label>
+        <input type="text" id="playername" placeholder="Enter your name">
+        <span class="desc lock"><i class="fa-solid fa-lock"></i>Login required to auto-fill your registered name</span>
+      </div>
+      <!-- Scheduled Game Session -->
+      <div class="form-group">
+        <label for="gamesession">Scheduled Game Session</label>
+        <select id="gamesession">
+          <option selected disabled>Select Game Session</option>
+          <option>Poker - 2025-09-10, 8:30pm</option>
+          <option>Baccarat Royale - 2025-09-12, 9:00pm</option>
+        </select>
+      </div>
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="+60 12-345 6789">
+      </div>
+      <!-- Estimated Arrival Time -->
+      <div class="form-group">
+        <label for="arrivaltime">Estimated Arrival Time</label>
+        <select id="arrivaltime">
+          <option selected disabled>Select Arrival Time</option>
+          <option>8:00 pm</option>
+          <option>8:30 pm</option>
+          <option>9:00 pm</option>
+          <option>9:30 pm</option>
+        </select>
+      </div>
+      <!-- Referring Agent -->
+      <div class="form-group">
+        <label for="agent">Referring Agent (Optional)</label>
+        <select id="agent">
+          <option selected disabled>Select Agent</option>
+          <option>John Doe</option>
+          <option>Jane Smith</option>
+        </select>
+      </div>
+      <!-- Reserve Seat (Optional) -->
+      <div class="form-group">
+        <label for="reserve-seat">Reserve Seat (Optional)</label>
+        <select id="reserve-seat" disabled>
+          <option selected>🔒 Login required to reserve seats</option>
+        </select>
+        <span class="desc lock"><i class="fa-solid fa-lock"></i>Member login required for seat reservations</span>
+      </div>
+      <!-- Food Order (Optional) -->
+      <div class="form-group" style="grid-column: span 2;">
+        <label for="food-order">Food Order (Optional)</label>
+        <textarea id="food-order" placeholder="Enter your food order here (e.g., Nasi Lemak, Teh Tarik, etc.)"></textarea>
+        <span class="desc info"><i class="fa-solid fa-utensils"></i>Food will be prepared around your estimated arrival time</span>
+      </div>
+      <div class="reserve-btn-row">
+        <button type="submit" class="reserve-btn"><i class="fa-solid fa-gem"></i>Reserve Seat Now</button>
+      </div>
+    </form>
   </div>
 </body>
 </html>
